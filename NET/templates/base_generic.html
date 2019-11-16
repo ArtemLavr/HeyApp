@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}<title></title>{% endblock %}
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+	<link rel="stylesheet" href="{% static 'css/scripts.css' %}">
+</head>
+
+<body>
+	<div class="topnav">
+		<a class="active" href="">Home</a>
+		<a href="devices">Devices</a>
+		<a href="s">S</a>
+		<a href="monitoring">Monitoring</a>
+	</div>
+	{% block content %}<!-- default content text (typically empty) -->{% endblock %}
+	
+</body>
+</html>

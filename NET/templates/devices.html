@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form action="/reconf/" method="POST">
+<div>
+
+	<div>
+		<input type="radio"  name="connectMethod" value="ssh" checked>
+		<label for="ssh">SSH</label>
+	</div>
+
+	<div>
+		<input type="radio"  name="connectMethod" value="telnet">
+		<label for="telnet">Telnet</label>
+	</div>
+</div>
+<div id = 'sshcon' style="display: non;">
+	
+		<input type="text" name="username" placeholder="Имя пользователя SSH">
+		<input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH">
+		<select name="SERVER_IP">
+			<option value="192.168.10.1">192.168.10.1</option>
+			<option value="192.168.10.2">192.168.10.2</option>
+
+		</select>
+		<input type="text" name="DEVICES_IP">
+		<input type="submit" value="Востановить конфигурационный файл">
+</div>
+
+<div id = 'sshcon' style="display: none;">
+	
+		
+		<select name="SERVER_IP">
+			<option value="192.168.10.1">192.168.10.1</option>
+			<option value="192.168.10.2">192.168.10.2</option>
+
+		</select>
+		<input type="text" name="DEVICES_IP">
+		<input type="submit" value="Востановить конфигурационный файл">
+</div>
+
+
+</form>
+{% endblock %}
