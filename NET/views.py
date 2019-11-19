@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .utils.utils import BU
 from subprocess import run,PIPE
+from django.http import HttpResponse
+
 
 def index(request):
 	return render(
@@ -8,12 +10,18 @@ def index(request):
 		'index.html',
 		)
 
+def snmp(request):
+	return render(
+		request, 
+		'snmptraps_setting.html',
+		)
 
 def devices(request):
 	return render(
 		request, 
 		'devices.html',
 		)
+
 
 def reconf(request):
 	connect_method = request.POST.get('connectMethod')

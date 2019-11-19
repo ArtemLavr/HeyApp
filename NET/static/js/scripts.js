@@ -1,7 +1,10 @@
-function disp(form) {
-        if (form.style.display == "none") {
-            form.style.display = "block";
-        } else {
-            form.style.display = "none";
-        }
+function sshtelnetCheck() {
+    if (document.getElementById('sshCheck').checked) {
+        document.getElementById('telnetCon').style.display = 'none';
+         document.getElementById('sshCon').style.display = 'block';
     }
+    else {
+    document.getElementById('sshCon').style.display = 'none';
+    document.getElementById('telnetCon').style.display = 'block';}
+
+}
