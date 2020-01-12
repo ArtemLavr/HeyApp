@@ -10,4 +10,5 @@ urlpatterns = [
 	url(r'^zabbix/$', RedirectView.as_view(url='http://127.0.0.1:80'),
         name='zabbix'),
 	url(r'reconf', reconf)
+
 ]

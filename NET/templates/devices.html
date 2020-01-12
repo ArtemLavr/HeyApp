@@ -1,13 +1,15 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+
 <form action="/reconf/" method="POST">
 <div>
-	
-	
-</div>
 <div>
-
+<h1>Востановление работоспособности узлов</h1>	
+</div>
+<hr>
+<div>
+	<h3>Выберите способ подключения</h3>
 	<div>
 		<input id = "sshCheck" type="radio"  name="connectMethod" value="ssh" checked onclick="javascript:sshtelnetCheck();">
 		<label for="ssh">SSH</label>
@@ -18,20 +20,23 @@
 		<label for="telnet">Telnet</label>
 	</div>
 </div>
-<div id = 'sshCon'  >
-	
-		<input type="text" name="username" placeholder="Имя пользователя SSH">
-		<input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH">
-		<select name="SERVER_IP">
+<hr>
+<hr>
+<div><h3>Востановления конфигурации устройства</h3></div>
+<div class = 'sshCon'  >
+		<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла"></div>
+		<div><input type="text" name="username" placeholder="Имя пользователя SSH"></div>
+		<div><input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH"></div>
+		<div><select name="SERVER_IP"></div>
 			<option value="192.168.10.1">192.168.10.1</option>
 			<option value="192.168.10.2">192.168.10.2</option>
 
-		</select>
-		<input type="text" name="DEVICES_IP">
-		<input type="submit" value="Востановить конфигурационный файл">
+		</select></div>
+		
+		<div><input type="submit" value="Востановить конфигурацию"></div>
 </div>
 
-<div id = 'telnetCon' style="display:none">
+<div class = 'telnetCon' style="display:none">
 	
 		
 		<select name="SERVER_IP">
@@ -40,9 +45,62 @@
 
 		</select>
 		<input type="text" name="DEVICES_IP">
-		<input type="submit" value="Востановить конфигурационный файл">
+		<input type="submit" value="Востановить конфигурацию">
+</div>
+<hr>
+<hr>
+<div><h3>Сброс пароля на устройстве</h3></div>
+<div class = 'sshCon'  >
+		<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла"></div>
+		<div><input type="text" name="username" placeholder="Имя пользователя SSH"></div>
+		<div><input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH"></div>
+		<div><select name="SERVER_IP"></div>
+			<option value="192.168.10.1">192.168.10.1</option>
+			<option value="192.168.10.2">192.168.10.2</option>
+
+		</select></div>
+		
+		<div><input type="submit" value="Востановить конфигурацию"></div>
 </div>
 
+<div class = 'telnetCon' style="display:none">
+	
+		
+		<select name="SERVER_IP">
+			<option value="192.168.10.1">192.168.10.1</option>
+			<option value="192.168.10.2">192.168.10.2</option>
 
+		</select>
+		<input type="text" name="DEVICES_IP">
+		<input type="submit" value="Востановить конфигурацию">
+</div>
+<hr>
+<hr>
+<div><h3>Востановление образа операционной системы узла</h3></div>
+<div class = 'sshCon'  >
+		<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла"></div>
+		<div><input type="text" name="username" placeholder="Имя пользователя SSH"></div>
+		<div><input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH"></div>
+		<div><select name="SERVER_IP"></div>
+			<option value="192.168.10.1">192.168.10.1</option>
+			<option value="192.168.10.2">192.168.10.2</option>
+
+		</select></div>
+		
+		<div><input type="submit" value="Востановить конфигурацию"></div>
+</div>
+
+<div class = 'telnetCon' style="display:none">
+	
+		
+		<select name="SERVER_IP">
+			<option value="192.168.10.1">192.168.10.1</option>
+			<option value="192.168.10.2">192.168.10.2</option>
+
+		</select>
+		<input type="text" name="DEVICES_IP">
+		<input type="submit" value="Востановить конфигурацию">
+</div>
+</div>
 </form>
 {% endblock %}

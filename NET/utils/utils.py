@@ -50,7 +50,7 @@ class BU():
 class SnmpSet():
     
 
-    def setting(self, con_type):
+    def setting_snmp(self, con_type):
 
         con_type.expect('[#>]')
         con_type.sendline('enable')
@@ -58,6 +58,7 @@ class SnmpSet():
         con_type.sendline(EN_PASS)
         con_type.expect('#')
         con_type.sendline('snmp-server community public RO')
+        con_type.sendline('snmp-server host')
     
 
 
@@ -69,10 +70,10 @@ class SnmpSet():
                 with pexpect.spawn('ssh {}@{}'.format(USER, IP)) as con_type:
                     con_type.expect('Password:')
                     con_type.sendline(PASSWORD)
-                    self.copy(con_type) 
+                    self.setting_snmp(con_type) 
             if CONNECTION_TYPE == 'telnet':
                 with pexpect.spawn('telnet {}'.format(IP)) as con_type:
-                    self.copy(con_type)
+                    self.setting_snmp(con_type)
 
 
 
