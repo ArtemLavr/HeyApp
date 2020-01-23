@@ -4,6 +4,13 @@ from subprocess import run,PIPE
 from django.http import HttpResponse
 
 
+def login(request):
+	return render(
+		request, 
+		'login.html',
+		)
+
+
 def index(request):
 	return render(
 		request,
@@ -21,6 +28,7 @@ def devices(request):
 		request, 
 		'devices.html',
 		)
+
 
 def set_snmp(request):
 	connect_method = request.POST.get('connectMethod')
