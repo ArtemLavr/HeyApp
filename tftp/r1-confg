@@ -1,0 +1,99 @@
+
+!
+version 12.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$BsqM$XKeOVH7nfFOywtzJ/5eHS1
+enable password cisco
+!
+no aaa new-model
+ip subnet-zero
+no ip icmp rate-limit unreachable
+!
+!
+ip cef
+ip tcp synwait-time 5
+no ip domain lookup
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin password 0 cisco
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.122.2 255.255.255.0
+ duplex half
+!
+interface FastEthernet1/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet2/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet2/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+ip classless
+no ip http server
+!
+!
+no cdp log mismatch duplex
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ password cisco
+ login
+line vty 5 15
+ password cisco
+ login
+!
+!
+end
