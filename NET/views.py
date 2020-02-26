@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .utils.utils import Configure, SnmpSet
 from subprocess import run,PIPE
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 def login(request):
@@ -40,11 +40,7 @@ def set_snmp(request):
 
 	try:
 		do_restore = SnmpSet(CONNECTION_TYPE, USER_NAME, PASSWORD, DEVICES_IP, EN_PASS, SNMP_SERVER)
-		return render(
-			request, 
-			'snmptraps_setting.html',
-			)
-
+		return redirect('snmp')
 	except Exception as e:
 		raise e
 
@@ -64,27 +60,17 @@ def save_conf(request):
 			
 			do_restore = Configure('Save',CONNECTION_TYPE, USER_NAME, PASSWORD, SERVER_IP, DEVICES_IP, EN_PASS, CONF_NAME)
 			
-			return render(
-				request, 
-				'devices.html',
-				)
-
+			return redirect('devices')
 		except Exception as e:
 			raise e
-			return render(
-				request, 
-				'devices.html',
-				)
+			return redirect('devices')
 	elif 'ssh_save' in request.POST:
 		CONNECTION_TYPE = 'ssh'
 	
 		try:
 			do_restore = Configure('Save',CONNECTION_TYPE, USER_NAME, PASSWORD, SERVER_IP,
 				DEVICES_IP, EN_PASS, CONF_NAME)
-			return render(
-				request, 
-				'devices.html',
-				)
+			return redirect('devices')
 
 		except Exception as e:
 			raise e
@@ -99,10 +85,7 @@ def set_conf(request):
 	try:
 		do_restore = Configure('Set',CONNECTION_TYPE, USER_NAME, PASSWORD, SERVER_IP,
 								 DEVICES_IP, EN_PASS, CONF_NAME)
-		return render(
-			request, 
-			'devices.html',
-			)
+		return redirect('devices')
 	except Exception as e:
 		raise e
 
