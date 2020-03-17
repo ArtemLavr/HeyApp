@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form action="set_netflow" method="POST">
+<div>
+<h1>Настройка SNMP на устройтсве</h1>	
+</div>
+<hr>
+<div>
+	<h3>Выберите способ подключения</h3>
+	<div>
+		<input id = "sshCheck" type="radio"  name="connectMethod" value="ssh" checked onclick="javascript:sshtelnetCheck();">
+		<label for="ssh">SSH</label>
+	</div>
+
+	<div>
+		<input id = "telnetCheck" type="radio"  name="connectMethod" value="telnet" onclick="javascript:sshtelnetCheck();">
+		<label for="telnet">Telnet</label>
+	</div>
+</div>
+<hr>
+<hr>
+<div id = ''>
+<div class = 'sshCon'  >
+	
+		<input type="text" name="username" placeholder="Имя пользователя SSH">
+		<input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH">
+		<input type="text" name="DEVICES_IP" placeholder="Адрес узлас сети">
+		<input type="text" name="SNMP_SERVER" placeholder="Адрес SNMP сервера">
+		<input type="text" name="EN_PASS" placeholder="Enable пароль">
+		<input type="submit" value="Настроить SNMP узла">
+</div>
+
+<div class = 'telnetCon' style="display:none">
+		<input type="text" name="DEVICES_IP" placeholder="Адрес узлас сети">
+		<input type="text" name="SNMP_SERVER" placeholder="Адрес SNMP сервера">
+		<input type="text" name="PASSWORD" placeholder="Пароль пользователя ">
+		<input type="text" name="EN_PASS" placeholder="Enable пароль">
+		<input type="submit" value="Настроить SNMP узла">
+</div>
+</div>
+</form>
+{% endblock %}

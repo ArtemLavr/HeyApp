@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class Auth(models.Model):
+	username = models.TextField(null = False)
+	password = models.TextField(null = False)

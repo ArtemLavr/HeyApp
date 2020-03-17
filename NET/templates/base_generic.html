@@ -6,27 +6,29 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <script src="{% static 'js/scripts.js' %}"></script>
+  
 
 </head>
 
 <body>
-	
-
-
-
-
-	
   <div class="navbar">
     <a href="{% url 'index' %}">Главная</a>
     <div class="subnav">
       <button class="subnavbtn">Устройства<i class="fa fa-caret-down"></i></button>
       <div class="subnav-content">
-        <a href="snmp">SNMP Traps</a>
+        <a href="snmp">SNMP</a>
+        <a href="netflow_setting">NetFlow</a>
         <a href="{% url 'devices' %}">Востановление устройств</a>
         <a href="#careers">Конфигурация</a>
       </div>
     </div> 
-    <a href="{% url 'zabbix' %}">Мониторинг</a>
+    <div class="subnav">
+      <button class="subnavbtn">Мониторинг<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="{% url 'zabbix' %}" target= "_blank">Zabbix</a>
+        <a href="{% url 'netflow' %}" target= "_blank">NetFlow Анализатор </a>
+      </div>
+    </div> 
     <div class="subnav">
       <button class="subnavbtn">Настройки <i class="fa fa-caret-down"></i></button>
       <div class="subnav-content">
