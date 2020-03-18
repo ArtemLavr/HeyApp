@@ -3,85 +3,133 @@
 
 {% block content %}
 
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	{% load static %}
 
-<div>
-	<div>
-		<h1>Востановление работоспособности узлов</h1>	
+
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+	<!-- Material Design Bootstrap -->
+
+	<!-- Your custom styles (optional) -->
+	
+	<script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+
+</head>
+<main class="pt-5 mx-lg-5">
+	
+	<div class="card mb-4 wow fadeIn">
+
+		<!--Card content-->
+		<div class="card-body d-sm-flex justify-content-between">
+
+			<h4 class="mb-2 mb-sm-0 pt-1">
+
+				<span>Востановление работоспособности узлов</span>
+			</h4>
+
+
+		</div>
+
 	</div>
-	<hr>
-	<div>
-		<h3>Выберите способ подключения</h3>
 
-		<div>
-			<input id = "sshCheck" type="radio"  name="connectMethod" value="ssh" checked onclick="javascript:sshtelnetCheck();">
-			<label for="ssh">SSH</label>
-		</div>
 
-		<div>
-			<input id = "telnetCheck" type="radio"  name="connectMethod" value="telnet" onclick="javascript:sshtelnetCheck();">
-			<label for="telnet">Telnet</label>
+	<div class="card mb-4 wow fadeIn">
+		<div class="card-body">
+			<h4>Выберите способ подключения</h4>
+
+			<div>
+				<input id = "sshCheck" type="radio"  name="connectMethod" value="ssh" checked onclick="javascript:sshtelnetCheck();">
+				<label for="ssh">SSH</label>
+			</div>
+
+			<div>
+				<input id = "telnetCheck" type="radio"  name="connectMethod" value="telnet" onclick="javascript:sshtelnetCheck();">
+				<label for="telnet">Telnet</label>
+			</div>
 		</div>
 	</div>
-	<hr>
-	<hr>
 
-	<div class="row" >
-		<div class="column">
-			<form action="set_conf" method="POST">
-				<div><h3>Востановление конфигурации устройства</h3></div>
-				<div class = 'sshCon'  >
 
-					<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла"></div>
-					<div><input type="text" name="USER_NAME" placeholder="Имя пользователя SSH"></div>
-					<div><input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH"></div>
-					<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера"></div>
-					<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE"></div>
-					<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла"></div>
-					<div><input type="submit" name="ssh_set" value="Востановить конфигурацию" ></div>
-
+	<div class="row wow fadeIn" >
+		<div class="col-md-6 mb-4">
+			<div class="card">
+				<div class="card-header text-center">
+					<h4>Востановление конфигурации устройства</h4>
 				</div>
+				<div class="card-body">
+					<form action="set_conf" method="POST">
 
-				<div class = 'telnetCon' style="display:none">
-					<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера"></div>
-					<div><input type="text" name="DEVICES_IP" placeholder="IP адрес устройства"></div>
-					<div><input type="text" name="PASSWORD" placeholder="Пароль telnet"></div>
-					<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE"></div>
-					<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла"></div>
-					<div><input type="submit" name="telnet_set" value="Востановить конфигурацию" ></div>
+						<div class = 'sshCon'  >
+
+							<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла" class="form-control"></div>
+							<div><input type="text" name="USER_NAME" placeholder="Имя пользователя SSH"class="form-control"></div>
+							<div><input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH"class="form-control"></div>
+							<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера"class="form-control"></div>
+							<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE"class="form-control"></div>
+							<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла"class="form-control"></div>
+							<div><input type="submit" name="ssh_set" value="Востановить конфигурацию"></div>
+
+						</div>
+
+						<div class = 'telnetCon' style="display:none">
+							<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера" class="form-control"></div>
+							<div><input type="text" name="DEVICES_IP" placeholder="IP адрес устройства" class="form-control"></div>
+							<div><input type="text" name="PASSWORD" placeholder="Пароль telnet" class="form-control"></div>
+							<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE" class="form-control" ></div>
+							<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла" class="form-control"></div>
+							<div><input type="submit" name="telnet_set" value="Востановить конфигурацию" ></div>
+						</div>
+					</form>
 				</div>
-			</form>
+			</div>
 		</div>
 
 
-		<div class="column">
-			<form action="save_conf" method="POST">
-				<div><h3>Сохранение конфигурации</h3></div>
-				<div class = 'sshCon'  >
-					<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла"></div>
-					<div><input type="text" name="USER_NAME" placeholder="Имя пользователя SSH"></div>
-					<div><input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH"></div>
-					<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера"></div>
-					<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE"></div>
-					<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла"></div>
-					<div><input type="submit" name="ssh_save"  value="Сохранить конфигурацию узлов"></div>
-				</div>
 
-				<div class = 'telnetCon' style="display:none">
-					<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера"></div>
-					<div><input type="text" name="DEVICES_IP" placeholder="IP адрес устройства"></div>
-					<div><input type="text" name="PASSWORD" placeholder="Пароль telnet"></div>
-					<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE"></div>
-					<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла"></div>
-					<div><input type="submit" name="telnet_save"  value="Сохранить конфигурацию узлов"></div>
+		<div class="col-md-6 mb-4">
+			<div class="card">
+				<div class="card-header text-center">
+					<h4>Сохранение конфигурации</h4>
 				</div>
-			</form>
+				<div class="card-body">
+					<form action="save_conf" method="POST">
+
+						<div class = 'sshCon'  >
+							<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла" class="form-control"></div>
+							<div><input type="text" name="USER_NAME" placeholder="Имя пользователя SSH" class="form-control"></div>
+							<div><input type="text" name="PASSWORD" placeholder="Пароль пользователя SSH" class="form-control"></div>
+							<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера" class="form-control"></div>
+							<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE" class="form-control"></div>
+							<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла" class="form-control"></div>
+							<div><input type="submit" name="ssh_save"  value="Сохранить конфигурацию узлов"></div>
+						</div>
+
+						<div class = 'telnetCon' style="display:none">
+							<div><input type="text" name="SERVER_IP" placeholder="Адрес cервера" class="form-control"></div>
+							<div><input type="text" name="DEVICES_IP" placeholder="IP адрес устройства" class="form-control"></div>
+							<div><input type="text" name="PASSWORD" placeholder="Пароль telnet" class="form-control"></div>
+							<div><input type="text" name="EN_PASS" placeholder="Пароль ENABLE" class="form-control"></div>
+							<div><input type="text" name="CONF_NAME" placeholder="Имя Конфигурационного файла" class="form-control"></div>
+							<div><input type="submit" name="telnet_save"  value="Сохранить конфигурацию узлов"></div>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
+
 	</div>
 	<hr>
 	<hr>
 	<div>
 		<form action="/reset_pass/" method="POST">
-			<div><h3>Сброс пароля на устройстве</h3></div>
+			<div><h4>Сброс пароля на устройстве</h4></div>
 			<div class = 'sshCon'  >
 				<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла"></div>
 				<div><input type="text" name="username" placeholder="Имя пользователя SSH"></div>
@@ -113,7 +161,7 @@
 	<hr>
 	<div>
 		<form action="/restore_os/" method="POST">
-			<div><h3>Востановление образа операционной системы узла</h3></div>
+			<div><h4>Востановление образа операционной системы узла</h4></div>
 			<div class = 'sshCon'  >
 				<div><input type="text" name="DEVICES_IP" placeholder="Адрес узла"></div>
 				<div><input type="text" name="username" placeholder="Имя пользователя SSH"></div>
@@ -143,4 +191,46 @@
 		</div>
 	</div>
 
-	{% endblock %}
+
+
+
+
+
+	<br>
+<div class="col-md-6 mb-4">
+<div class="container">
+  <h2>Toggleable Tabs</h2>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+</main>
+{% endblock %}
