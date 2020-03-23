@@ -14,7 +14,7 @@ def login(request):
 def index(request):
 	return render(
 		request,
-		'index.html',
+		'index.html'
 		)
 
 def snmp(request):
