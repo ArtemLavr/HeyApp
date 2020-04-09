@@ -5,7 +5,8 @@ import getpass
 import sys
 import psycopg2
 from contextlib import closing
-
+import datetime
+import calendar
 
 
 
@@ -215,17 +216,18 @@ class Get_Data():
     def __init__(self):
         with closing(psycopg2.connect(dbname='postgres', user='postgres', password='flows', host='localhost')) as conn: 
             with conn.cursor() as cursor: 
-                cursor.execute(""" 
-                    SELECT (cast(extract(epoch from time_flow) as integer)/30)*30 AS "time", 
-                    sum(bytes*sampling_rate*8)/30 
-                    FROM flows 
-                    WHERE date_inserted
-                    BETWEEN '2020-04-08T10:35:28.383Z' AND '2020-04-08T10:40:28.383Z' 
-                    GROUP BY "time" 
+                cursor.execute(f""" 
+                    SELECT
+                    (cast(extract(epoch from time_flow) as integer)/30)*30 AS "time",
+                    sum(bytes*sampling_rate*8)/30
+                    FROM flows
+                    WHERE
+                    date_inserted BETWEEN '{datetime.date.today()}{list(calendar.day_name)[datetime.date.today().weekday()][0]}{(datetime.datetime.now() - datetime.timedelta(minutes = 60)).time()}' AND '{datetime.date.today()}{list(calendar.day_name)[datetime.date.today().weekday()][0]}{datetime.datetime.now().time()}'
+                    GROUP BY "time"
                     ORDER BY "time" 
                     """)
                 print("Good connection")
-                self.metric_list = [metric for _,metric in cursor] 
+                self.metric_list = [float(metric)/1000 for _,metric in cursor] 
                      
 
         

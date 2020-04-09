@@ -155,7 +155,7 @@
         <!--Card-->
         <div class="card">
          <div class="card-header text-center">
-        <div>Загруженность устройств</div>
+          <div>Загруженность устройств</div>
         </div>
 
         <!--Card content-->
@@ -343,9 +343,9 @@
             <div class="clearfix"></div>
             <ul class="days">
               <script>
-              for( var _i = 1; _i <= 31; _i += 1 ){
+              for( var _i = 1; _i <= 30; _i += 1 ){
                 var _addClass = '';
-                if( _i === 26 ){ _addClass = ' class="selected"'; }
+                if( _i === 5 ){ _addClass = ' class="selected"'; }
                 
                 switch( _i ){
                   case 8:
@@ -400,6 +400,7 @@
 
     <!-- Charts -->
     <script>
+   
     // Line
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
@@ -464,9 +465,9 @@
     var myLineChart = new Chart(ctxL, {
       type: 'line',
       data: {
-        labels: ["1","2","3","4","5","6","7","8","9","11"],
+        labels: {{series | safe}},
         datasets: [{
-          label: "Входящий трафик",
+          label: "Входящий трафик: kb/s",
           backgroundColor: [
           'rgba(105, 0, 132, .2)',
           ],
@@ -474,7 +475,7 @@
           'rgba(200, 99, 132, .7)',
           ],
           borderWidth: 2,
-          data:{{metrics}} 
+          data: {{ metrics | safe}}
         }
         ]
       },
@@ -514,6 +515,7 @@
       },
       options: {
         responsive: true
+
       }
     });
 
