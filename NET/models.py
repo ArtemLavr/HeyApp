@@ -2,7 +2,8 @@ from django.db import models
 
 
 
-class Devices():
+
+class Nodes(models.Model):
 	d_name = models.TextField(null=False)
 	TYPES= (
 		('None', 'Введите тип устройства'),
@@ -11,11 +12,11 @@ class Devices():
 		('l', 'Linux'),
 		('w', 'Windows'),
 		('p', 'Поток'),
-		('u','Неизвестное устройство') 
+		('u','Неизвестное устройство'), 
 		)
-	d_type = models.CharField(max_length=1, choices='TYPES',null=False)
-	d_id_address = models.TextField(null=False)
-	d_last_update_time = models.DateTimeField(null=False)
+	d_type = models.CharField(max_length=4, choices = TYPES ,null=False)
+
+	
 
 class Events(models.Model):
 	ev_text = models.TextField(null=False)

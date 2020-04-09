@@ -19,7 +19,8 @@ urlpatterns = [
 	url(r'set_conf', set_conf),
 	url(r'set_snmp', set_snmp),
 	url(r'reset_pass', reset_pass),
-	url(r'restore_os', restore_os)
+	url(r'restore_os', restore_os),
+	
 
 ]
 

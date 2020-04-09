@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
-from .utils.utils import Configure, SnmpSet
+from .utils.utils import Configure, SnmpSet, Get_Data
 from subprocess import run,PIPE
 from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader 
+from .models import Events, Nodes
+
+
 
 
 def login(request):
@@ -12,10 +16,23 @@ def login(request):
 
 
 def index(request):
+	
+	evs = Events.objects.order_by('-ev_time')
+	nds = Nodes.objects.order_by('pk')
+	metrics = Get_Data()
+	print("METRICS:::")
+	print(metrics.metric_list)
+	context = {	'metrics': metrics.metric_list,
+				'evs':evs,
+				'nds':nds,
+				}
 	return render(
-		request,
-		'index.html'
+		request, 
+		'index.html', context,
 		)
+
+
+
 
 def snmp(request):
 	return render(
@@ -136,3 +153,4 @@ def reset_pass(request):
 
 def restore_os():
 	pass
+

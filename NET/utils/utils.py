@@ -3,6 +3,11 @@ from pexpect import pxssh
 from netmiko import ConnectHandler
 import getpass
 import sys
+import psycopg2
+from contextlib import closing
+
+
+
 
 class Configure():
     
@@ -206,3 +211,21 @@ class Os(object):
         con_type.expect('#')
         con_type.sendline('snmp-server host {} public'.format(SNMP_SERVER))
                        
+class Get_Data():
+    def __init__(self):
+        with closing(psycopg2.connect(dbname='postgres', user='postgres', password='flows', host='localhost')) as conn: 
+            with conn.cursor() as cursor: 
+                cursor.execute(""" 
+                    SELECT (cast(extract(epoch from time_flow) as integer)/30)*30 AS "time", 
+                    sum(bytes*sampling_rate*8)/30 
+                    FROM flows 
+                    WHERE date_inserted
+                    BETWEEN '2020-04-08T10:35:28.383Z' AND '2020-04-08T10:40:28.383Z' 
+                    GROUP BY "time" 
+                    ORDER BY "time" 
+                    """)
+                print("Good connection")
+                self.metric_list = [metric for _,metric in cursor] 
+                     
+
+        
