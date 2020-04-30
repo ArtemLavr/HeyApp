@@ -15,6 +15,7 @@ urlpatterns = [
 	path('login',login, name='login'),
 	url(r'^zabbix/$', RedirectView.as_view(url='http://127.0.0.1:80'), name='zabbix'),
 	url(r'^netflow/$', RedirectView.as_view(url='http://127.0.0.1:3000'), name='netflow'),
+	url(r'^ssh_telnet/$', RedirectView.as_view(url='http://127.0.0.1:8182'), name='ssh_telnet'),
 	url(r'save_conf', save_conf),
 	url(r'set_conf', set_conf),
 	url(r'set_snmp', set_snmp),

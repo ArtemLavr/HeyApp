@@ -212,22 +212,43 @@ class Os(object):
         con_type.expect('#')
         con_type.sendline('snmp-server host {} public'.format(SNMP_SERVER))
                        
-class Get_Data():
-    def __init__(self):
-        with closing(psycopg2.connect(dbname='postgres', user='postgres', password='flows', host='localhost')) as conn: 
-            with conn.cursor() as cursor: 
-                cursor.execute(f""" 
-                    SELECT
-                    (cast(extract(epoch from time_flow) as integer)/30)*30 AS "time",
-                    sum(bytes*sampling_rate*8)/30
-                    FROM flows
-                    WHERE
-                    date_inserted BETWEEN '{datetime.date.today()}{list(calendar.day_name)[datetime.date.today().weekday()][0]}{(datetime.datetime.now() - datetime.timedelta(minutes = 60)).time()}' AND '{datetime.date.today()}{list(calendar.day_name)[datetime.date.today().weekday()][0]}{datetime.datetime.now().time()}'
-                    GROUP BY "time"
-                    ORDER BY "time" 
-                    """)
-                print("Good connection")
-                self.metric_list = [float(metric)/1000 for _,metric in cursor] 
+# class Get_Data():
+#     def __init__(self):
+#         with closing(psycopg2.connect(dbname='postgres', user='postgres', password='flows', host='localhost')) as conn: 
+#             with conn.cursor() as cursor: 
+#                 cursor.execute(f""" 
+#                SELECT
+#   (cast(extract(epoch from time_flow) as integer)/30)*30 AS "time",
+#   sum(bytes*sampling_rate*8)/30
+# FROM flows
+# WHERE
+#   date_inserted BETWEEN '2020-04-10T06:19:00.792Z' AND '2020-04-10T07:19:00.793Z'
+# GROUP BY "time"
+# ORDER BY "time"
+#                     """)
+#                 print("Good connection")
+#                 self.metric_list = [float(metric)/1000 for _,metric in cursor] 
                      
 
         
+# with closing(psycopg2.connect(dbname='postgres', user='postgres', passw
+#     ord='flows', host='localhost')) as conn:  
+#                 with conn.cursor() as cursor:  
+#                     cursor.execute(f"""  
+#                         SELECT 
+#                         (cast(extract(epoch from time_flow) as integer)/30)*
+#     30 AS "time", 
+#                         sum(bytes*sampling_rate*8)/30 
+#                         FROM flows 
+#                         WHERE 
+#                         date_inserted BETWEEN '{datetime.date.today()}{list(
+#     calendar.day_name)[datetime.date.today().weekday()][0]}{(datetime.dateti
+#     me.now() - datetime.timedelta(minutes = 60)).time()}' AND '{datetime.dat
+#     e.today()}{list(calendar.day_name)[datetime.date.today().weekday()][0]}{
+#     datetime.datetime.now().time()}' 
+#                         GROUP BY "time" 
+#                         ORDER BY "time"  
+#                         """) 
+#                     print("Good connection") 
+#                     metric_list = [float(metric)/1000 for _,metric in cursor
+#     ] 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .utils.utils import Configure, SnmpSet, Get_Data
+from .utils.utils import Configure, SnmpSet
 from subprocess import run,PIPE
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader 
@@ -21,14 +21,14 @@ def index(request):
 	
 	evs = Events.objects.order_by('-ev_time')
 	nds = Nodes.objects.order_by('pk')
-	metrics = Get_Data()
+	# metrics = Get_Data()
 
-	print("METRICS:::")
-	print(metrics.metric_list)
-	series = [str(x)[:5] for x in[ (datetime.datetime.now() - datetime.timedelta(minutes = 2*t )).time() for t in range(30)]][::-1]                                                                      
+	# print("METRICS:::")
+	# print(metrics.metric_list)
+	# series = [str(x)[:5] for x in[ (datetime.datetime.now() - datetime.timedelta(minutes = 2*t )).time() for t in range(30)]][::-1]                                                                      
 	context = {	
-				'series':series,
-				'metrics': metrics.metric_list,
+				# 'series':series,
+				# 'metrics': metrics.metric_list,
 				'evs':evs,
 				'nds':nds,
 				}
